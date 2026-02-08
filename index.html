@@ -204,6 +204,7 @@ margin-top:20px;
 <source src="song.mp3">
 </audio>
 
+<!-- PAGE 1 -->
 <section class="active">
 <h1>Hey Beautiful ❤️</h1>
 <video src="rose.mp4" autoplay loop muted></video>
@@ -211,6 +212,7 @@ margin-top:20px;
 <button onclick="next()">Enter ➝</button>
 </section>
 
+<!-- PAGE 2 -->
 <section>
 <h1>My Heart Says...</h1>
 <video src="cat.mp4" autoplay loop muted></video>
@@ -218,6 +220,7 @@ margin-top:20px;
 <button onclick="next()">Next ➝</button>
 </section>
 
+<!-- PAGE 3 -->
 <section>
 <h1>How beautiful you are 😍</h1>
 <div class="gallery">
@@ -230,6 +233,7 @@ margin-top:20px;
 <button onclick="next()">Next ➝</button>
 </section>
 
+<!-- PAGE 4 -->
 <section>
 <h1>One Last Thing...</h1>
 <video src="hug.mp4" autoplay loop muted></video>
@@ -237,11 +241,14 @@ margin-top:20px;
 <button onclick="next()">Continue ➝</button>
 </section>
 
+<!-- PAGE 5 -->
 <section>
 <h1>Anwesha, Will You Be Mine? 💍</h1>
 <video src="love.mp4" autoplay loop muted></video>
+
 <button onclick="yes()">YES ❤️</button>
 <button onclick="no()">NO 🙈</button>
+
 </section>
 
 <!-- MODAL -->
@@ -297,17 +304,37 @@ document.body.appendChild(f);
 setTimeout(()=>f.remove(),9000);
 },250);
 
-/* YES */
+/* YES & NO MAGIC */
+let noClicks=0;
+let yesScale=1;
+
 function yes(){
 fireworks();
 showModal("She Said YES 😭❤️",
 "I promise to love you, respect you, and choose you every single day.");
 }
 
-/* NO */
 function no(){
-showModal("She Said NO 🙈",
-"Even if you said no... my heart still belongs to you ❤️");
+const noBtn=event.target;
+const yesBtn=document.querySelector("button[onclick='yes()']");
+
+noClicks++;
+
+/* move NO */
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"vw";
+noBtn.style.top=Math.random()*80+"vh";
+
+/* grow YES */
+yesScale+=0.2;
+yesBtn.style.transform=`scale(${yesScale})`;
+
+/* after 10 clicks */
+if(noClicks>=10){
+noBtn.innerHTML="YES ❤️";
+noBtn.onclick=yes;
+yesBtn.innerHTML="YES ❤️";
+}
 }
 
 /* FIREWORKS */
